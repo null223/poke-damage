@@ -1,4 +1,8 @@
 # Logs
+
+*.sublime-project
+*.sublime-workspace
+
 logs
 *.log
 npm-debug.log*
