@@ -9,12 +9,12 @@ const Start = ({status, setStatus, update}) => {
     return { value, onChange: e => set(e.target.value) };
   };
   const name = useInput("");
-  const hp = useInput("");
+  const hp = useInput(0);
 
   const onSubmit = e => {
     e.preventDefault();
     const _name = name.value ? name.value : "ポケモン"
-    setStatus(_status => ({..._status, name: _name, hp: hp.value}));
+    setStatus(_status => ({..._status, name: _name, hp: +hp.value}));
     if (!(hp.value < 10)) {
       update("battle");
     }

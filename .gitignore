@@ -2,7 +2,7 @@
 
 *.sublime-project
 *.sublime-workspace
-
+build/
 logs
 *.log
 npm-debug.log*

@@ -9,6 +9,10 @@ function App() {
     <main>
       <StyledWrapper>
         <Base />
+        <Base />
+        <Base />
+        <Base />
+        <Base />
       </StyledWrapper>
     </main>
   );
@@ -17,7 +21,8 @@ function App() {
 const StyledWrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
   background-color: #ddd;
   padding: 10px;
 `;

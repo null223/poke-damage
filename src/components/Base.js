@@ -19,7 +19,7 @@ const Base = () => {
   const initStatus = () => setStatus(initialState);
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className="mb-4">
     {state == "init" ?
       <Init update={update} />
     : state == "start" ?

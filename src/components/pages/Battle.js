@@ -3,26 +3,46 @@ import styled from 'styled-components';
 
 
 const Battle = ({status, setStatus, initStatus, update}) => {
-  
+  const ResetButton = () => {
+    const onClick = e => {
+      e.preventDefault();
+      initStatus();
+      update("init");
+    }
+    return <button onClick={onClick} className="btn btn-dark" children="リセット" />;
+  }
+  const HPUpButton = () => {
+    const onClick = e => {
+      e.preventDefault();
+      setStatus(_status => ({..._status, hp: _status.hp + 10}));
+    }
+    return <button onClick={onClick} className="btn btn-info" children="+HP10" />;
+  };
+  const HPDownButton = () => {
+    const onClick = e => {
+      e.preventDefault();
+      if (status.hp > status.damage)
+        setStatus(_status => ({..._status, hp: _status.hp - 10}));
+    }
+    return <button onClick={onClick} className="btn btn-warning" children="-HP10" />;
+  };
   const DamageBackButton = () => {
-    const onClick = () => {
+    const onClick = e => {
+      e.preventDefault();
       if (status.damage != 0)
         setStatus(_status => ({..._status, damage: _status.damage - 10}));
     }
-    return (
-      <StyledDamageBackButton onClick={onClick}
-        className="btn btn-primary">
-        +10
-      </StyledDamageBackButton> 
-    );
+    return <button onClick={onClick} className="btn btn-primary" children="+10" />;
   };
 
   const DamageButton = () => {
-    const handleDown = () => {
+    const handleDown = e => {
+      e.preventDefault();
       initStatus();
       update('start');
     }
-    const onClick = () =>{
+    const onClick = e => {
+      e.preventDefault();
       setStatus(_status => ({..._status, damage: _status.damage + 10}));
     }
     if (status.hp <= status.damage) {
@@ -38,7 +58,12 @@ const Battle = ({status, setStatus, initStatus, update}) => {
     <div className="position-relative">
       <p>{status.name}</p>
       <p>HP {status.hp - status.damage - status.pre_damage}/{status.hp}</p>
-      <DamageBackButton />
+      <StyledButtonsWrapper>
+        <ResetButton />
+        <HPUpButton />
+        <HPDownButton />
+        <DamageBackButton />
+      </StyledButtonsWrapper>
       <DamageButton />
     </div>
   );
@@ -46,11 +71,17 @@ const Battle = ({status, setStatus, initStatus, update}) => {
 
 export default Battle;
 
-const StyledDamageBackButton = styled.button`
+
+
+const StyledButtonsWrapper = styled.div`
   position: absolute;
+  right: 0;
   top: 0;
-  right: 0;  
- `;
+  display: inline-flex;
+  & button + button {
+    margin-left: .5rem;
+  }
+`;
 
 const StyledDamageButton = styled.button`
   width: 100%;
